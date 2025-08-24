@@ -24,11 +24,11 @@ exports.handler = async (event) => {
     const apptDt = new Date(appointment_datetime);
     const timeMaxDt = new Date(apptDt.getTime() + durationInMinutes * 60000);
 
-    appointmentDateTime = appointment_datetime;
+    appointmentDateTime = `${appointment_datetime}${fixedTimezoneOffset}`;
     appointmentDate = appointment_datetime.split('T')[0];
     appointmentTime = appointment_datetime.split('T')[1].slice(0, 8); // Extracts 'HH:mm:ss'
-    timeMin = appointment_datetime;
-    timeMax = timeMaxDt.toISOString();
+    timeMin = `${appointment_datetime}${fixedTimezoneOffset}`;
+    timeMax = `${timeMaxDt.toISOString().slice(0, 19)}${fixedTimezoneOffset}`;
   }
 
   const responseBody = {
